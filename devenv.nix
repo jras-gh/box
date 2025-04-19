@@ -1,6 +1,8 @@
-{ ... }:
+{ pkgs, ... }:
 
 {
+  packages = [ pkgs.cobra-cli ];
+
   languages.go.enable = true;
 
   pre-commit.hooks.gofmt.enable = true;
