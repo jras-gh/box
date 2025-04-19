@@ -1,4 +1,4 @@
-{
+rec {
   description = "Box is a nixos container management tool";
 
   inputs = {
@@ -8,12 +8,18 @@
   outputs = { self, nixpkgs }: {
     packages.x86_64-linux.default =
       with import nixpkgs { system = "x86_64-linux"; };
-      stdenv.mkDerivation {
-        name = "box";
+      buildGoModule {
+        pname = "box";
+        version = "0.0.1";
+
         src = self;
-        buildInputs = [ go ];
-        buildPhase = "go build .";        
-        installPhase = "mkdir -p $out/bin; install -t $out/bin box";
+        vendorHash = "sha256-m5mBubfbXXqXKsygF5j7cHEY+bXhAMcXUts5KBKoLzM=";
+
+        meta = {
+          description = description;
+          license = lib.licenses.asl20;
+          maintainers = with lib.maintainers; [ jras ];
+        };
       };
   };
 }
