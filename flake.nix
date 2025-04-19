@@ -11,6 +11,7 @@
       stdenv.mkDerivation {
         name = "box";
         src = self;
+        buildInputs = [ go ];
         buildPhase = "go build .";        
         installPhase = "mkdir -p $out/bin; install -t $out/bin box";
       };
